@@ -2,11 +2,16 @@ package com.personal.health.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.personal.health.entity.User;
-import com.personal.health.service.UserService;
+
+
 
 /**
  * 用户控制层
@@ -17,21 +22,20 @@ import com.personal.health.service.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
-	@Autowired
-	private UserService userService;
-	
 	@RequestMapping("/login")
 	public String login(User user, HttpServletRequest request){
-		User userLogin = userService.login(user);
-		if (userLogin == null) {
-			request.setAttribute("user", user);
-			request.setAttribute("errorMsg", "用户名或者密码错误");
-			return "/index";
-		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("currentUser", userLogin);
-			return "/success";
-		}
+		Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
+        try{
+            subject.login(token);//会跳到我们自定义的realm中
+            request.getSession().setAttribute("user", user);
+            return "success";
+        }catch(Exception e){
+            e.printStackTrace();
+            request.getSession().setAttribute("user", user);
+            request.setAttribute("error", "用户名或密码错误！");
+            return "login";
+        }
 	}
 
 }
