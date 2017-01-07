@@ -26,6 +26,7 @@
   		<jstl.version>1.2</jstl.version>
   		<jackson.version>2.5.1</jackson.version>
   		<commons-fileupload.version>1.2.1</commons-fileupload.version>
+  		<shiro.version>1.2.4</shiro.version>
   </properties>
   <dependencyManagement>
   	<dependencies>
@@ -163,6 +164,25 @@
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>${commons-fileupload.version}</version>
+		</dependency>
+		
+		<!-- shiro Begin -->
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-core</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-web</artifactId>
+		    <version>${shiro.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-spring</artifactId>
+		    <version>${shiro.version}</version>
 		</dependency>
   	</dependencies>
   </dependencyManagement>
