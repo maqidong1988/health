@@ -4,7 +4,7 @@ package com.personal.health.entity;
 public class User{
 
 	private Integer id;       //编号
-	private String username;  //用户名
+	private String userName;  //用户名
 	private String password;  //密码
 	
 	
@@ -23,14 +23,14 @@ public class User{
 	/**
 	 * @return the username
 	 */
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 	/**
 	 * @param username the username to set
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	/**
 	 * @return the password
