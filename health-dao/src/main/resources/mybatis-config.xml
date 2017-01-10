@@ -3,8 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <configuration>
-	<!-- 别名 -->
+	<!-- 别名 
 	<typeAliases>
 		<package name="com.personal.health.entity"/>
-	</typeAliases>
+	</typeAliases>  -->
+	<!-- 
+	<mappers>  
+7         <mapper resource="com/personal/health/mapping/UserDao.xml"/>  
+8   </mappers>  -->
 </configuration>
