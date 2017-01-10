@@ -7,9 +7,9 @@ pageEncoding="UTF-8"%>
 	<title>固定表头</title>  
 	</head> 
 	<body>
-		<form action="${pageContext.request.contextPath}/user/login" method="post">
-			username:<input type="text" name="username" value="${user.username}"/></br>
-			password:<input type="password" name="password" value="${user.password}"/></br>
+		<form action="${pageContext.request.contextPath}/user/login.do" method="post">
+			username:<input type="text" name="username"/></br>
+			password:<input type="password" name="password"/></br>
 			<input type="submit" value="login"/><font color="red">${errorMsg}</font>
 		</form>
 	</body>
