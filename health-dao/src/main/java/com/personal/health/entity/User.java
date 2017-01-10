@@ -7,6 +7,16 @@ public class User{
 	private String userName;  //用户名
 	private String password;  //密码
 	
+	public User() {
+		
+	}
+	
+	public User(Integer id, String userName, String password) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+	}
 	
 	/**
 	 * @return the id
@@ -14,6 +24,7 @@ public class User{
 	public Integer getId() {
 		return id;
 	}
+	
 	/**
 	 * @param id the id to set
 	 */
