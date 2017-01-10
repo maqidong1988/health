@@ -15,16 +15,17 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<import resource="applicationContext-shiro.xml"/>
+	<context:property-placeholder location="classpath:jdbc.properties"/>
 	
 	<!-- 自动扫描(自动注入) -->
 	<context:component-scan base-package="com.personal.health.service" />
 
 	<!-- 配置数据源 -->
 	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />   
-		<property name="url" value="jdbc:mysql://localhost:3306/myProject" />   
-		<property name="username" value="root"/>   
-		<property name="password" value="root" />  
+		<property name="driverClassName" value="${jdbc.driver}" />   
+		<property name="url" value="${jdbc.url}" />   
+		<property name="username" value="${jdbc.username}"/>   
+		<property name="password" value="${jdbc.password}" />  
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
@@ -34,7 +35,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     </bean> 
     
     <!-- dao所在的包名,spring会自动查找其下的类 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <bean id="aaa" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.personal.health.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
