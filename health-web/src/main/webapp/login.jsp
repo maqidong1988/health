@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false" %>
-<%@ include file="../commons/res/taglibs.jsp" %>
+<%@ include file="./WEB-INF/commons/res/taglibs.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -71,7 +71,7 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" name="username" class="form-control" placeholder="用户名" />
+															<input type="text" name="userName" class="form-control" placeholder="用户名" />
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
@@ -83,6 +83,7 @@
 														</span>
 													</label>
 													
+													<%--
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="text" class="form-control required" id="catpcha" name="captcha" placeholder="验证码" maxlength="4" />
@@ -91,7 +92,7 @@
 																<img id="captcha-img" src="${ctx}/captcha?captchaToken=${captchaToken}" onclick="this.src='${ctx}/captcha?captchaToken=${captchaToken}&d='+new Date().getTime()" style="cursor: pointer" />
 															</i>
 														</span>
-													</label>
+													</label> --%>
 
 													<div class="space"></div>
 
@@ -128,16 +129,19 @@
 		<script type="text/javascript" src="${res}/js/jquery.form.min.js"></script>
 
 		<!-- inline scripts related to this page -->
+		 
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#login-btn").click(function() {
 					$("#login-form").ajaxSubmit(function(result) {
 						if (result.success) {
+							alert('success');
 							var redirectUrl = result.data || "${empty ctx ? '/' : ctx}"; 
 							window.location.href = redirectUrl;
 						} else {
+							alert('error');
 							alert(result.msg);
-							$("#captcha-img").click();
+							<%-- $("#captcha-img").click();--%>
 						}
 					});
 				});
