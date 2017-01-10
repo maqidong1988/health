@@ -1,5 +1,7 @@
 package com.personal.health.security;
 
+import java.util.List;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -18,6 +20,9 @@ public class MyRealm extends AuthorizingRealm {
 	@Autowired
 	private UserService userService;
 
+	/**
+	 * 角色权限认证
+	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
 		String username = (String) principal.getPrimaryPrincipal(); //获取用户名
@@ -27,17 +32,29 @@ public class MyRealm extends AuthorizingRealm {
         return authorizationInfo;
 	}
 
+	/**
+	 * 身份认证
+	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) 
 			throws AuthenticationException {
+		System.out.println("222222222222222");
 		String username = (String) token.getPrincipal(); // 获取用户名
-        User user = userService.getByUserName(username);
-        if(user != null) {
-            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), "myRealm");
+		User user = userService.getByUserId(1);
+		if (user != null) {
+			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), "myRealm");
             return authcInfo;
-        } else {
-            return null;
-        }       
+		} else {
+			return null;
+		}
+//        List<User> users = userService.getByUserName(username);
+//        if(users != null && users.size() > 0) {
+//        	User user = users.get(0);
+//            AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), "myRealm");
+//            return authcInfo;
+//        } else {
+//            return null;
+//        }       
 	}
 
 }
