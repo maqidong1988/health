@@ -1,5 +1,6 @@
 package com.personal.health.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import com.personal.health.entity.User;
@@ -8,12 +9,14 @@ public interface UserDao {
 
 	public User login(User user);
 	
+	public User getByUserId(Integer userId);
+	
 	/**
 	 * 通过用户名查询用户
 	 * @param userName
 	 * @return
 	 */
-	public User getByUserName(String userName);
+	public List<User> getByUserName(String userName);
 	
 	/**
 	 * 通过用户名查询角色信息
@@ -28,4 +31,6 @@ public interface UserDao {
 	 * @return
 	 */
 	public Set<String> getPermissions(String userName);
+	
+	public User save(User user);
 }
