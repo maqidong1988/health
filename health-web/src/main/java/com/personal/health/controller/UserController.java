@@ -1,15 +1,9 @@
 package com.personal.health.controller;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.personal.health.entity.User;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
@@ -19,23 +13,15 @@ import com.personal.health.entity.User;
  *
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping(value="/user")
 public class UserController {
-	
-	@RequestMapping("/login")
-	public String login(User user, HttpServletRequest request){
-		Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
-        try{
-            subject.login(token);//会跳到我们自定义的realm中
-            request.getSession().setAttribute("user", user);
-            return "success";
-        }catch(Exception e){
-            e.printStackTrace();
-            request.getSession().setAttribute("user", user);
-            request.setAttribute("error", "用户名或密码错误！");
-            return "login";
-        }
-	}
 
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	public String login(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("1111111111111");
+		String userName = request.getParameter("username");
+		String password = request.getParameter("password");
+		System.out.println(userName+password);
+		return null;
+	}
 }
