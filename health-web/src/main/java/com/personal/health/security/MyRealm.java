@@ -27,8 +27,9 @@ public class MyRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
 		String username = (String) principal.getPrimaryPrincipal(); //获取用户名
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        authorizationInfo.setRoles(userService.getRoles(username));
-        authorizationInfo.setStringPermissions(userService.getPermissions(username));
+        System.out.println(username);
+//        authorizationInfo.setRoles(userService.getRoles(username));
+//        authorizationInfo.setStringPermissions(userService.getPermissions(username));
         return authorizationInfo;
 	}
 
@@ -38,10 +39,10 @@ public class MyRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) 
 			throws AuthenticationException {
-		System.out.println("222222222222222");
 		String username = (String) token.getPrincipal(); // 获取用户名
-		User user = userService.getByUserId(1);
-		if (user != null) {
+		List<User> users = userService.getByUserName(username);
+		if (users != null && users.size() > 0) {
+			User user = users.get(0);
 			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), "myRealm");
             return authcInfo;
 		} else {
