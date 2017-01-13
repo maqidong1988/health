@@ -1,15 +1,16 @@
 package com.personal.health.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.personal.health.entity.User;
+import com.personal.health.service.UserService;
 
 
 @Controller
@@ -17,14 +18,12 @@ public class LoginController {
 
 	@RequestMapping(value="/login")
 	public String login(){
-		System.out.println("coming=====");
 		return "login";
 	}
 	
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(User user, HttpServletRequest request, HttpServletResponse response){
-		System.out.println("1111111111111");
 		Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(), user.getPassword());
         try{
@@ -38,4 +37,5 @@ public class LoginController {
             return "login";
         }
 	}
+	
 }
