@@ -7,7 +7,7 @@ pageEncoding="UTF-8"%>
 	<title>固定表头</title>  
 	</head> 
 	<body>
-		欢迎:${currentUser.username}
+		欢迎:=============
 	</body>
 
 </html> 
