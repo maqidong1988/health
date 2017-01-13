@@ -12,32 +12,38 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 http://www.springframework.org/schema/aop 
 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 http://www.springframework.org/schema/context
-http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<import resource="applicationContext-shiro.xml"/>
-	<context:property-placeholder location="classpath:jdbc.properties"/>
 	
 	<!-- 自动扫描(自动注入) -->
 	<context:component-scan base-package="com.personal.health.service" />
-
+	
+	<!-- 引入外部数据源配置信息 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+       <property name="locations">
+           <value>classpath:env/jdbc.properties</value>
+       </property>
+    </bean>
 	<!-- 配置数据源 -->
 	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${jdbc.driver}" />   
 		<property name="url" value="${jdbc.url}" />   
-		<property name="username" value="${jdbc.username}"/>   
+		<property name="username" value="${jdbc.user}"/>   
 		<property name="password" value="${jdbc.password}" />  
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSource" /> 
-        <!-- 自动扫描mappers.xml 文件 --> 
-        <property name="mapperLocations" value="classpath:com/personal/health/mapping/*.xml"/>  
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+        <property name="mapperLocations" value="classpath*:com/personal/health/mapping/*.xml" />
+        <property name="typeAliasesPackage" value="com.personal.health.entity" /> 
     </bean> 
     
     <!-- dao所在的包名,spring会自动查找其下的类 -->
-    <bean id="aaa" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.personal.health.dao" />
-		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
 	
 	<!-- 配置事务管理器 -->
