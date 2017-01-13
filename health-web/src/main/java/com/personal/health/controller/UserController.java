@@ -18,7 +18,6 @@ public class UserController {
 
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("1111111111111");
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
 		System.out.println(userName+password);
