@@ -9,18 +9,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="password" column="password"/>
 	</resultMap>
 
-	<select id="login" parameterType="com.personal.health.entity.User" resultType="com.personal.health.entity.User">
+	<select id="login" parameterType="User" resultType="User">
 		select * from user where userName=#{userName} and password=#{password}
 	</select>
 	
-	<select id="getByUserId" parameterType="Integer" resultType="com.personal.health.entity.User">
+	<select id="getByUserId" parameterType="Integer" resultType="User">
 		select * from user where id=#{userId}
 	</select>
 	
-	<select id="getByUserName" parameterType="java.lang.String" resultType="com.personal.health.entity.User">
+	 
+	<select id="getByUserName" parameterType="java.lang.String" resultType="User">
 		select * from user where userName=#{userName}
 	</select>
-	
+	<!--
 	<select id="getRoles" parameterType="String" resultMap="String">
 		select r.roleName from user u,role r where u.roleId=r.id and u.userName=#{userName} 
 	</select>
@@ -29,8 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select p.permissionName from user u,role r,permission p where u.roleId=r.id and p.roleId=r.id and u.userName=#{userName}
 	</select>
 	
-	<insert id="save" parameterType="com.personal.health.entity.User" flushCache="true">  
+	<insert id="save" parameterType="User" flushCache="true">  
         insert into user (userName,password) VALUES (#{userName},#{password})  
  	</insert>  
-
+ -->
 </mapper>
